@@ -35,9 +35,22 @@ const server = http.createServer((req,res) => {
     const pathName = req.url;
     if (pathName === '/' || pathName === '/overview'){
         res.end('This is an OVERVIEW');
+
     } else if (pathName === '/product'){
     res.end('This is a PRODUCT');
-    } else{
+
+    } else if (pathName === '/api'){
+        fs.readFile(`${__dirname}/starter/dev-data/data.json`,`utf-8`,(err,data)=>{
+            const productData = JSON.parse(data)
+            console.log(productData)
+        })
+
+       
+
+        res.end('API');
+
+
+    }else{
         res.writeHead(404, {
             'Content-type':'text/html',
             'my-own-header': 'hello world'
